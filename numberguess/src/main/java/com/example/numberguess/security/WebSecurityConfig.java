@@ -14,25 +14,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig {
 	@Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-            .csrf((csrf) -> csrf
-                .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
-            .headers((headers) -> headers
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                    XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-            .formLogin((formLogin) -> formLogin
-                .loginPage("/controller/login")
-                .defaultSuccessUrl("/"))
-        ;
-        return http.build();
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+	    return http
+	      
+	      .csrf(csrf ->csrf
+	        .disable()
+	      )
+	      
+	     
+	     
+	      .build();
+	}
 
 }
